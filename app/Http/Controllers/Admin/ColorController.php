@@ -33,7 +33,7 @@ class ColorController extends Controller
             'titulo'               => 'required|string|max:255',
             'tituloen'            => 'required|string|max:255',
             'tituloport'            => 'required|string|max:255',
-            'path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -70,7 +70,7 @@ class ColorController extends Controller
             'titulo'               => 'nullable|string|max:255',
             'tituloen'            => 'nullable|string|max:255',
             'tituloport'            => 'nullable|string|max:255',
-            'path'                 => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'path'                 => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
         if ($validator->fails()) {
             return back()->witherrors($validator->messages()->first());

@@ -20,7 +20,7 @@
             <div class="grid lg:grid-cols-3 gap-6">
                 @foreach ($aplicaciones as $aplicacion)
                     <a href="{{ route('aplicacion', ['id' => $aplicacion->id]) }}"
-                        class="relative transition-transform transform hover:-translate-y-1 duration-300 shadow-lg hover:shadow-xl">
+                        class="relative transition-transform transform hover:-translate-y-1 duration-300 shadow-lg hover:shadow-xl text-white">
                         <img src="{{ $aplicacion->path }}"
                             alt="{{ __('Aplicación') }} {{ getLocalizedField($aplicacion, 'titulo') }}"
                             class="w-full h-[242px] object-cover rounded-[10px] bg-black">

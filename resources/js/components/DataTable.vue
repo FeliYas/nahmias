@@ -735,7 +735,7 @@ const toggleDestacado = (id, isChecked) => {
                                             <input type="file" :id="column" @change="handleCreateFileChange"
                                                 class="hidden">
                                             <p class="text-xs text-gray-400 mt-1">
-                                                Formatos permitidos: JPEG, PNG, JPG, SVG. <br>
+                                                Formatos permitidos: JPEG, PNG, JPG, SVG, WEBP. <br>
                                                 Recomendacion: {{ recomendacion }}px
                                             </p>
                                         </div>
@@ -944,7 +944,7 @@ const toggleDestacado = (id, isChecked) => {
                                             <input type="file" :id="`edit_${column}`" @change="handleEditFileChange"
                                                 class="hidden">
                                             <p class="text-xs text-gray-400 mt-1">
-                                                Formatos permitidos: JPEG, PNG, JPG, SVG. <br>
+                                                Formatos permitidos: JPEG, PNG, JPG, SVG, WEBP. <br>
                                                 Recomendacion: {{ recomendacion }}px
                                             </p>
                                         </div>

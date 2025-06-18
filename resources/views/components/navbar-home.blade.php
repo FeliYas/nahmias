@@ -41,7 +41,7 @@
     <div class="hidden lg:block bg-white border-b border-gray-200 fixed w-full h-[184px] ">
         <div class="h-[36px] bg-main-color py-2.5">
             <div class="max-w-[90%] lg:max-w-[1224px] mx-auto text-xs flex justify-between items-center">
-                <div class="flex gap-6">
+                <div class="flex gap-6 text-white">
                     @foreach ($contactos as $contacto)
                         <a href="https://www.google.com/maps/search/{{ urlencode(explode(' Cdad.', $contacto->direccion)[0]) }}"
                             target="_blank" class="flex items-center gap-2 hover:text-gray-200 transition-colors">
@@ -81,7 +81,7 @@
                     @endforeach
                 </div>
                 <div class="relative inline-block">
-                    <button id="language-selector" class="font-semibold flex items-center gap-1 cursor-pointer">
+                    <button id="language-selector" class="font-semibold flex items-center gap-1 cursor-pointer text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="9" viewBox="0 0 15 9"
                             fill="none">
                             <path

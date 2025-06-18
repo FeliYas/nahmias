@@ -38,6 +38,6 @@ const props = defineProps({
         <!-- Línea -->
         <hr class="border-t-[3px] border-main-color rounded">
         <DataTable :columns="columns" :data="imagenes" :createRoute="createRoute" :updateRoute="updateRoute"
-            :deleteRoute="deleteRoute" :productoId="producto.id" />
+            :deleteRoute="deleteRoute" :productoId="producto.id" recomendacion="300x240"/>
     </div>
 </template>

@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="lg:mt-[36px]">
-            <div class="relative">
+            <div class="relative text-white">
                 <img src="{{ $aplicacion->path }}" alt="{{ __('banner') }}" class="w-full h-[300px] object-cover">
                 <span class="absolute inset-0 bg-black opacity-50"></span>
                 <h3 class="absolute inset-0 max-w-[90%] lg:max-w-[1224px] mx-auto flex items-center font-semibold text-2xl">
@@ -32,7 +32,7 @@
                                         class="border border-gray-200 overflow-hidden bg-white w-full h-[229px] object-contain transition-transform duration-500 hover:scale-105 px-5 py-3">
                                 @else
                                     <div
-                                        class="w-full h-72 bg-gray-100 flex items-center justify-center text-gray-500 transition-colors duration-300 hover:text-gray-700">
+                                        class="w-full h-[229px] bg-gray-100 flex items-center justify-center text-gray-500 transition-colors duration-300 hover:text-gray-700">
                                         <span>{{ __('Sin imagen') }}</span>
                                     </div>
                                 @endif

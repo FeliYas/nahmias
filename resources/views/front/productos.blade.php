@@ -39,7 +39,7 @@
                                         class="border border-gray-200 overflow-hidden bg-white w-full h-[229px] object-contain transition-transform duration-500 hover:scale-105 px-5 py-3">
                                 @else
                                     <div
-                                        class="w-full h-72 bg-gray-100 flex items-center justify-center text-gray-500 transition-colors duration-300 hover:text-gray-700">
+                                        class="w-full h-[229px] bg-gray-100 flex items-center justify-center text-gray-500 transition-colors duration-300 hover:text-gray-700">
                                         <span>{{ __('Sin imagen') }}</span>
                                     </div>
                                 @endif

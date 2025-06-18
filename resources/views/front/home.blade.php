@@ -163,7 +163,7 @@
                                     alt="{{ __('imagen de producto') }} {{ getLocalizedField($producto, 'titulo') }}"
                                     class="h-[230px] w-full border border-[#DDE3E8] py-2.5 px-9.5">
                             @else
-                                <div class="bg-gray-200 w-full h-40 flex items-center justify-center">
+                                <div class="bg-gray-200 w-full h-[229px] flex items-center justify-center">
                                     <span class="text-gray-500">{{ __('Sin imagen') }}</span>
                                 </div>
                             @endif
@@ -192,7 +192,7 @@
                 <img src="{{ $contenido[1]->path }}" alt="{{ __('Contenido de la pagina') }}" class="w-full h-[400px]">
                 <div class="absolute inset-0">
                     <div
-                        class="flex flex-col gap-6.5 text-center items-center justify-center max-w-[90%] lg:max-w-[48%] mx-auto h-full">
+                        class="flex flex-col gap-6.5 text-center items-center justify-center max-w-[90%] lg:max-w-[48%] mx-auto h-full text-white">
                         <h2 class="lg:text-[36px] font-semibold">{{ getLocalizedField($contenido[1], 'titulo') }}</h2>
                         <div class="custom-summernote font-medium text-center lg:text-[30px] leading-9">
                             <p>{!! getLocalizedField($contenido[1], 'descripcion') !!}</p>

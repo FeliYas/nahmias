@@ -31,7 +31,7 @@ class ProductoImgController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'producto_id' => 'required|exists:productos,id',
-            'path' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
+            'path' => 'required|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'orden' => 'required|string|max:255',
         ]);
         if ($validator->fails()) {
@@ -56,7 +56,7 @@ class ProductoImgController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'path' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
+            'path' => 'nullable|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'orden' => 'nullable|string|max:255',
         ]);
         if ($validator->fails()) {
