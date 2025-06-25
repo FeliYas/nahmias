@@ -25,7 +25,7 @@ class NosotrosController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'path' => 'nullable|mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov|max:100000',
+            'path' => 'nullable|mimes:jpeg,png,jpg,gif,svg,mp4,avi,mov,webp,webm|max:140000',
             'descripcion' => 'nullable|string',
             'descripcionen' => 'nullable|string',
             'descripcionport' => 'nullable|string',

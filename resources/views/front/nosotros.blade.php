@@ -44,8 +44,18 @@
         <div class="max-w-[90%] lg:max-w-[1224px] mx-auto py-12 flex flex-col lg:flex-row gap-14">
             <div class="custom-summernote font-light text-black leading-5 text-[17px]">
                 <p>{!! getLocalizedField($nosotros, 'descripcion') !!}</p>
-            </div>
-            <img src="{{ $nosotros->path }}" alt="{{ __('Imagen de Nosotros') }}" class="lg:w-1/2 h-[289px] object-cover">
+            @php
+                $extension = strtolower(pathinfo($nosotros->path, PATHINFO_EXTENSION));
+            @endphp
+
+            @if (in_array($extension, ['mp4', 'webm', 'ogg']))
+                <video controls class="lg:w-1/2 h-[289px] object-cover">
+                    <source src="{{ $nosotros->path }}" type="video/{{ $extension }}">
+                    {{ __('Tu navegador no soporta la reproducción de video.') }}
+                </video>
+            @elseif (in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg']))
+                <img src="{{ $nosotros->path }}" alt="{{ __('Imagen de Nosotros') }}" class="lg:w-1/2 h-[289px] object-cover">
+            @endif
         </div>
     </div>
     <script>

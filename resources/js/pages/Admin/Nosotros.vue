@@ -24,6 +24,22 @@ const props = defineProps({
 
 const imagePreview = ref('');
 
+// Funciones para detectar tipo de archivo
+const getExtension = (filename) => {
+    if (!filename) return '';
+    return filename.split('.').pop().toLowerCase();
+};
+
+const isImage = (filename) => {
+    const exts = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'];
+    return exts.includes(getExtension(filename));
+};
+
+const isVideo = (filename) => {
+    const exts = ['mp4', 'webm', 'ogg', 'avi', 'mov'];
+    return exts.includes(getExtension(filename));
+};
+
 // Initialize the form with nosotros data
 const form = useForm({
     descripcion: props.nosotros.descripcion,
@@ -37,16 +53,23 @@ onMounted(() => {
     imagePreview.value = props.nosotros.path;
 });
 
-// Preview the selected image
+// Preview the selected image or video
 const previewImage = (event) => {
     const file = event.target.files[0];
     if (file) {
         form.path = file;
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            imagePreview.value = e.target.result;
-        };
-        reader.readAsDataURL(file);
+
+        // Para videos, usar URL.createObjectURL
+        if (isVideo(file.name)) {
+            imagePreview.value = URL.createObjectURL(file);
+        } else {
+            // Para imágenes, usar FileReader como antes
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagePreview.value = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
     }
 };
 
@@ -84,16 +107,32 @@ const submit = () => {
                 class="w-full transition-all duration-300 hover:shadow-lg hover:border-main-color transform hover:-translate-y-1">
                 <div
                     class="w-full bg-gray-100 p-6 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group">
-                    <div class="flex flex-col md:flex-row gap-8">
-                        <!-- Contenedor de la imagen con vista previa -->
+                    <div class="flex flex-col md:flex-row gap-8"> <!-- Contenedor de la imagen con vista previa -->
                         <div class="md:w-1/3 flex flex-col">
                             <h3
                                 class="block text-sm font-medium text-gray-700 mb-2 group-hover:text-main-color transition-colors duration-300">
-                                Imagen principal</h3>
+                                Imagen o Video principal</h3>
                             <div
                                 class="relative overflow-hidden rounded-lg border-2 border-gray-200 group-hover:border-main-color transition-all duration-300">
-                                <img :src="imagePreview" alt="Imagen"
+
+                                <!-- Mostrar imagen -->
+                                <img v-if="isImage(imagePreview)" :src="imagePreview" alt="Imagen"
                                     class="w-full h-auto object-cover rounded-md transition-all duration-500">
+
+                                <!-- Mostrar video -->
+                                <video v-else-if="isVideo(imagePreview)" :src="imagePreview" controls
+                                    class="w-full h-auto object-cover rounded-md transition-all duration-500">
+                                    Tu navegador no soporta el elemento video.
+                                </video>
+
+                                <!-- Mostrar placeholder si no hay nada -->
+                                <div v-else class="w-full h-48 bg-gray-200 flex items-center justify-center rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
 
                                 <!-- Overlay con efecto al hover -->
                                 <div
@@ -107,16 +146,18 @@ const submit = () => {
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
-                                        Cambiar imagen
+                                        Cambiar archivo
                                     </label>
                                 </div>
                             </div>
 
                             <!-- Recomendación de tamaño -->
-                            <span class="text-xs text-gray-400 mt-2 italic">Recomendación: 670x600 px</span>
+                            <span class="text-xs text-gray-400 mt-2 italic">
+                                Imágenes: 670x600 px | Videos: MP4, WEBM, OGG
+                            </span>
 
-                            <!-- Input file oculto -->
-                            <input type="file" class="hidden" id="path" @change="previewImage">
+                            <!-- Input file oculto que acepta imágenes y videos -->
+                            <input type="file" class="hidden" id="path" @change="previewImage" accept="image/*,video/*">
                         </div>
 
                         <!-- Contenedor de formulario -->
@@ -132,7 +173,8 @@ const submit = () => {
                                 </div>
                                 <div class="lg:max-w-1/3">
                                     <label for="descripcionen"
-                                        class="block text-sm font-medium text-gray-700 mb-1 transition-colors duration-200 group-focus-within:text-main-color">Descripción en ingles</label>
+                                        class="block text-sm font-medium text-gray-700 mb-1 transition-colors duration-200 group-focus-within:text-main-color">Descripción
+                                        en ingles</label>
                                     <QuillEditor unique_ref="descripcionen_editor" placeholder="Descripción"
                                         :initial_content="form.descripcionen"
                                         v-on:text_changed="form.descripcionen = $event">
@@ -140,7 +182,8 @@ const submit = () => {
                                 </div>
                                 <div class="lg:max-w-1/3">
                                     <label for="descripcionport"
-                                        class="block text-sm font-medium text-gray-700 mb-1 transition-colors duration-200 group-focus-within:text-main-color">Descripción en portuges</label>
+                                        class="block text-sm font-medium text-gray-700 mb-1 transition-colors duration-200 group-focus-within:text-main-color">Descripción
+                                        en portuges</label>
                                     <QuillEditor unique_ref="descripcionport_editor" placeholder="Descripción"
                                         :initial_content="form.descripcionport"
                                         v-on:text_changed="form.descripcionport = $event">

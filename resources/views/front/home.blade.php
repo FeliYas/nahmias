@@ -157,11 +157,11 @@
                 <h2 class="font-medium text-[26px] text-[#E12328]">{{ __('NUESTROS PRODUCTOS') }}</h2>
                 <div class="grid lg:grid-cols-4 gap-6 w-full">
                     @foreach ($productos as $producto)
-                        <div class="flex flex-col gap-2.5">
+                        <a href="{{ route('producto', ['id' => $producto->id]) }}" class="flex flex-col gap-2.5">
                             @if ($producto->imagenPrincipal)
                                 <img src="{{ $producto->imagenPrincipal->path }}"
                                     alt="{{ __('imagen de producto') }} {{ getLocalizedField($producto, 'titulo') }}"
-                                    class="h-[230px] w-full border border-[#DDE3E8] py-2.5 px-9.5">
+                                    class="h-[280px] lg:h-[230px] w-full border border-[#DDE3E8] py-2.5 px-9.5">
                             @else
                                 <div class="bg-gray-200 w-full h-[229px] flex items-center justify-center">
                                     <span class="text-gray-500">{{ __('Sin imagen') }}</span>
@@ -169,7 +169,7 @@
                             @endif
                             <h3 class="text-black text-[17px] font-semibold">{{ getLocalizedField($producto, 'titulo') }}
                             </h3>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
                 <a href="{{ route('productos') }}" class="btn-primary w-[213px] mb-4.5">{{ __('VER TODOS') }}</a>

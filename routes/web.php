@@ -70,6 +70,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/admin/nosotros/banner/create', [BannerController::class, 'store'])->name('banner.store');
     Route::put('/admin/nosotros/banner/update/{id}', [BannerController::class, 'update'])->name('banner.update');
     Route::delete('/admin/nosotros/banner/delete/{id}', [BannerController::class, 'destroy'])->name('banner.destroy');
+    
     Route::get('/admin/nosotros', [NosotrosController::class, 'index'])->name('nosotros.dashboard');
     Route::post('/admin/nosotros/update/{id}', [NosotrosController::class, 'update'])->name('nosotros.update');
 
